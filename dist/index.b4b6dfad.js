@@ -27387,43 +27387,31 @@ var _movieView = require("../movie-view/movie-view");
 var _s = $RefreshSig$();
 const MainView = ()=>{
     _s();
-    const [movies, SetMovies] = (0, _react.useState)([
-        {
-            id: 1,
-            Title: "Shutter Island",
-            Director: "Martin Scorsese",
-            Genre: "Suspense-Thriller",
-            ImageUrl: "https://upload.wikimedia.org/wikipedia/en/7/76/Shutterislandposter.jpg"
-        },
-        {
-            id: 2,
-            Title: "The Fugitive",
-            Director: "Andrew Davis",
-            Genre: "Suspense-Thriller",
-            ImageUrl: "https://upload.wikimedia.org/wikipedia/en/c/c7/The_Fugitive_movie.jpg"
-        },
-        {
-            id: 3,
-            Title: "The Shack",
-            Director: "Stuart Hazeldine",
-            Genre: "Feel-Good",
-            ImageUrl: "https://upload.wikimedia.org/wikipedia/en/7/70/The_Shack_%28film%29.jpg"
-        }
-    ]);
+    const [movies, SetMovies] = (0, _react.useState)([]);
     const [selectedMovie, setSelectedMovie] = (0, _react.useState)(null);
+    (0, _react.useEffect)(()=>{
+        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjNjMDUxMjY3NmJmZTc2Nzg2YjRjYWIiLCJVc2VybmFtZSI6InNwb25nZWJvYiIsIlBhc3N3b3JkIjoic3F1YXJlcGFudHMiLCJFbWFpbCI6InRoZXNwb25nZUBrcnVzdHlrcmFiLmNvbSIsIkJpcnRoZGF5IjoiMTk5Ni0wNy0wOFQwMDowMDowMC4wMDBaIiwiRmF2b3JpdGVNb3ZpZXMiOltdLCJfX3YiOjAsImlhdCI6MTcxNjk0NTM5MCwiZXhwIjoxNzE3NTUwMTkwLCJzdWIiOiJzcG9uZ2Vib2IifQ.Nyl43bZW1AtWjJJ2xVkIMU4xNMQw3PxUb_TU2PcTTjU";
+        fetch("https://movie-api-xkkk.onrender.com/movies", {
+            headers: {
+                Authorizantion: "Bearer " + token
+            }
+        }).then((response)=>response.json()).then((movies)=>{
+            setMovies(movies);
+        }).catch((e)=>console.log(e));
+    }, []);
     if (selectedMovie) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
         movie: selectedMovie,
         onBackClick: ()=>setSelectedMovie(null)
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 35,
+        lineNumber: 26,
         columnNumber: 7
     }, undefined);
     if (movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: "The list is empty!"
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 40,
+        lineNumber: 31,
         columnNumber: 12
     }, undefined);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -27434,16 +27422,16 @@ const MainView = ()=>{
                 }
             }, movie.id, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 46,
+                lineNumber: 37,
                 columnNumber: 9
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 44,
+        lineNumber: 35,
         columnNumber: 5
     }, undefined);
 };
-_s(MainView, "ATjTkK3hk7XBxlEulqDCI7XrxcU=");
+_s(MainView, "RBE2ffUjLPGUegu2UFO3W70R4VM=");
 _c = MainView;
 var _c;
 $RefreshReg$(_c, "MainView");
