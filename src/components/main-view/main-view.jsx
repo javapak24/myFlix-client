@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
+import { SignupView } from "../signup-view/signup-view";
 
 export const MainView = () => {
     const [movies, setMovies] = useState([]);
@@ -18,9 +19,18 @@ export const MainView = () => {
           
       }, []);
 
-  if (!user) {
-    return <LoginView onLoggedIn={(user) => setUser(user)} />;
-  }
+      if (!user) {
+        return (
+          <>
+            <LoginView onLoggedIn={(user, token) => {
+              setUser(user);
+              setToken(token);
+            }} />
+            or
+            <SignupView />
+          </>
+        );
+      }
 
   if (selectedMovie) {
     return (
