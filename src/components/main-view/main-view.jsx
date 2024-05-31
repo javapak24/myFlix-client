@@ -43,13 +43,7 @@ export const MainView = () => {
           }}
         />
       ))}
-      <button
-        onClick={() => {
-          setUser(null);
-        }}
-      >
-        Logout
-      </button>
+     <button onClick={() => { setUser(null); localStorage.clear(); }}>Logout</button>
     </div>
   );
 };
