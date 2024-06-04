@@ -4,11 +4,13 @@ import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
+import { Row, Col } from "react-bootstrap";
 
 export const MainView = () => {
     const [movies, setMovies] = useState([]);
     const [selectedMovie, setSelectedMovie] = useState(null);
     const [user, setUser] = useState(null);
+    const [token, setToken] = useState(null);
 
     useEffect(() => {
         fetch("https://movie-api-xkkk.onrender.com/movies")
@@ -43,8 +45,9 @@ export const MainView = () => {
   }
 //console.log(movies);
   return (
-    <div>
+    <Row>
       {movies.map((movie) => (
+        <Col className = 'md5'>
         <MovieCard
           key={movie._id}
           movie={movie}
@@ -52,8 +55,9 @@ export const MainView = () => {
             setSelectedMovie(newSelectedMovie);
           }}
         />
+        </Col>
       ))}
      <button onClick={() => { setUser(null); localStorage.clear(); }}>Logout</button>
-    </div>
+    </Row>
   );
 };
