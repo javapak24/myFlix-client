@@ -51,12 +51,16 @@ export const MainView = () => {
       <Routes>
         <Route path="/login" element={
               <>
-              <LoginView onLoggedIn={(user, token) => {
-                console.log(user);
-                localStorage.setItem("user", user);
-                setUser(user);
-                //setToken(token);
-              }} />
+              {!user ? (
+                <LoginView onLoggedIn={(user, token) => {
+                  console.log(user);
+                  localStorage.setItem("user", user);
+                  setUser(user);
+                  //setToken(token);
+                }} />
+                  ):(
+                    <Navigate to="/"/>
+                  )}
             </>
         }>
         </Route>
@@ -88,12 +92,12 @@ export const MainView = () => {
             </>
         }>
         </Route>
-        <Route path="/" element={
+        <Route path="/movies/:movieId" element={
               <>
               {!user ? (
-                  <Navigate to="/movies/:movieId" replace />
+                  <Navigate to="/login" replace />
                   ):(
-                    <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
+                    <MovieView movies = {movies} onBackClick={() => setSelectedMovie(null)} />
                   )}
             </>
         }>
