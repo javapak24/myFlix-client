@@ -22,11 +22,12 @@ export const LoginView = ({ onLoggedIn }) => {
     })
     .then((response) => response.json())
     .then((response) => {
+      console.log(response);
       if (response) {
         localStorage.setItem("user", JSON.stringify(response.user));
         localStorage.setItem("token", response.token);
+        // location.href = "/"
         onLoggedIn(response.user, response.token);
-        onLoggedIn(username);
       } else {
         alert("Login failed");
       }

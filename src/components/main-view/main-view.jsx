@@ -5,7 +5,38 @@ import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 import { Row, Col } from "react-bootstrap";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom";
+import { ProfileView } from "../profile-view/profile-view";
+
+const NavBar = () => {
+  if (!localStorage.getItem("user")) {
+    return (
+      <nav>
+        <ul style={{ display: "flex", justifyContent: "space-between" , listStyle: "none"}}>
+          <li>
+            <Link to="/login">Login</Link>
+          </li>
+          <li>
+            <Link to="/signup">Signup</Link>
+          </li>
+        </ul>
+      </nav>
+    );
+  }
+
+  return (
+    <nav>
+      <ul style={{ display: "flex", justifyContent: "space-between" , listStyle: "none"}}>
+        <li>
+          <Link to="/">Movies</Link>
+        </li>
+        <li>
+          <Link to="/profile">Profile</Link>
+        </li>
+      </ul>
+    </nav>
+  );
+}; 
 
 export const MainView = () => {
     const [movies, setMovies] = useState([]);
@@ -51,10 +82,11 @@ export const MainView = () => {
       <Routes>
         <Route path="/login" element={
               <>
+              <NavBar></NavBar>
               {!user ? (
                 <LoginView onLoggedIn={(user, token) => {
-                  console.log(user);
-                  localStorage.setItem("user", user);
+                  // console.log(user);
+                  // localStorage.setItem("user", user);
                   setUser(user);
                   //setToken(token);
                 }} />
@@ -66,12 +98,14 @@ export const MainView = () => {
         </Route>
         <Route path="/signup" element={
               <>
+              <NavBar></NavBar>
               <SignupView />
             </>
         }>
         </Route>
         <Route path="/" element={
               <>
+              <NavBar></NavBar>
               {!user ? (
                   <Navigate to="/login" replace />
                   ):(<>
@@ -94,11 +128,19 @@ export const MainView = () => {
         </Route>
         <Route path="/movies/:movieId" element={
               <>
+              <NavBar></NavBar>
               {!user ? (
                   <Navigate to="/login" replace />
                   ):(
                     <MovieView movies = {movies} onBackClick={() => setSelectedMovie(null)} />
                   )}
+            </>
+        }>
+        </Route>
+        <Route path="/profile" element={
+              <>
+              <NavBar></NavBar>
+              <ProfileView/>
             </>
         }>
         </Route>

@@ -2,10 +2,11 @@ import{ useState } from "react";
 import { Button, Form } from "react-bootstrap";
 
 export const ProfileView = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
-  const [birthday, setBirthday] = useState("");
+  const localUser = JSON.parse(localStorage.getItem("user"));
+  const [username, setUsername] = useState(localUser.Username);
+  const [password, setPassword] = useState(localUser.Password);
+  const [email, setEmail] = useState(localUser.Email);
+  const [birthday, setBirthday] = useState(localUser.Birthday);
 
   const handleSubmit = (event) => {
     event.preventDefault();
