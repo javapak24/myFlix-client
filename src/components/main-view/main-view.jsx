@@ -33,6 +33,13 @@ const NavBar = () => {
         <li>
           <Link to="/profile">Profile</Link>
         </li>
+        <li>
+          <Link to="#" onClick={()=>{
+            localStorage.clear();
+            location.reload();
+
+          }}>Logout</Link>
+        </li>
       </ul>
     </nav>
   );
@@ -140,7 +147,7 @@ export const MainView = () => {
         <Route path="/profile" element={
               <>
               <NavBar></NavBar>
-              <ProfileView/>
+              <ProfileView movies = {movies}/>
             </>
         }>
         </Route>

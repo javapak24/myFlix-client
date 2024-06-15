@@ -1,7 +1,7 @@
 import{ useState } from "react";
 import { Button, Form } from "react-bootstrap";
 
-export const ProfileView = () => {
+export const ProfileView = ({movies}) => {
   const localUser = JSON.parse(localStorage.getItem("user"));
   const [username, setUsername] = useState(localUser.Username);
   const [password, setPassword] = useState(localUser.Password);
@@ -82,6 +82,21 @@ export const ProfileView = () => {
         />
     </Form.Group>
       <Button variant="primary" type="submit">Edit Profile</Button>
+      {
+        movies.filter((movie) => {
+    return localUser.FavoriteMovies.includes(movie.id);
+  }).map((movie) => (
+    <Card>
+        <Card.Img variant="top" src={movie.ImagePath}/>
+        <Card.Body>
+        <Card.Title>{movie.Title}</Card.Title>
+        <Card.Text>{movie.Director.Name}</Card.Text>
+        <Link to = {`/movies/${movie._id}`}>
+          Open
+        </Link>
+        </Card.Body>
+      </Card>
+        ))}
     </Form>
   );
 };
