@@ -1,8 +1,13 @@
 import{ useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Card, Form } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export const ProfileView = ({movies}) => {
   const localUser = JSON.parse(localStorage.getItem("user"));
+  const fav =  movies.filter((movie) => {
+    return localUser.FavoriteMovies.includes(movie._id);
+  });
+  
   const [username, setUsername] = useState(localUser.Username);
   const [password, setPassword] = useState(localUser.Password);
   const [email, setEmail] = useState(localUser.Email);
@@ -33,7 +38,7 @@ export const ProfileView = ({movies}) => {
       }
     });
   };
-
+console.log(fav);
   return (
     <Form onSubmit={handleSubmit}>
     <Form.Group controlId="formUsername">
@@ -83,9 +88,7 @@ export const ProfileView = ({movies}) => {
     </Form.Group>
       <Button variant="primary" type="submit">Edit Profile</Button>
       {
-        movies.filter((movie) => {
-    return localUser.FavoriteMovies.includes(movie.id);
-  }).map((movie) => (
+       fav.map((movie) => (
     <Card>
         <Card.Img variant="top" src={movie.ImagePath}/>
         <Card.Body>
