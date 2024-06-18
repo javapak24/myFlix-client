@@ -1,6 +1,7 @@
 import{ useState } from "react";
 import { Button, Card, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { MovieCard } from "../movie-card/movie-card";
 
 export const ProfileView = ({movies}) => {
   const localUser = JSON.parse(localStorage.getItem("user"));
@@ -8,10 +9,10 @@ export const ProfileView = ({movies}) => {
     return localUser.FavoriteMovies.includes(movie._id);
   });
   
-  const [username, setUsername] = useState(localUser.Username);
-  const [password, setPassword] = useState(localUser.Password);
-  const [email, setEmail] = useState(localUser.Email);
-  const [birthday, setBirthday] = useState(localUser.Birthday);
+  const [username, setUsername] = useState(localUser.Username||"");
+  const [password, setPassword] = useState(localUser.Password||"");
+  const [email, setEmail] = useState(localUser.Email||"");
+  const [birthday, setBirthday] = useState(localUser.Birthday||"01/01/0001");
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -88,17 +89,19 @@ console.log(fav);
     </Form.Group>
       <Button variant="primary" type="submit">Edit Profile</Button>
       {
-       fav.map((movie) => (
-    <Card>
-        <Card.Img variant="top" src={movie.ImagePath}/>
-        <Card.Body>
-        <Card.Title>{movie.Title}</Card.Title>
-        <Card.Text>{movie.Director.Name}</Card.Text>
-        <Link to = {`/movies/${movie._id}`}>
-          Open
-        </Link>
-        </Card.Body>
-      </Card>
+       localUser && fav.map((movie) => (
+        <MovieCard movie={movie}>
+        </MovieCard>
+    // <Card>
+    //     <Card.Img variant="top" src={movie.ImagePath}/>
+    //     <Card.Body>
+    //     <Card.Title>{movie.Title}</Card.Title>
+    //     <Card.Text>{movie.Director.Name}</Card.Text>
+    //     <Link to = {`/movies/${movie._id}`}>
+    //       Open
+    //     </Link>
+    //     </Card.Body>
+    //   </Card>
         ))}
     </Form>
   );

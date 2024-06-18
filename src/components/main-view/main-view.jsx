@@ -37,6 +37,7 @@ const NavBar = () => {
           <Link to="#" onClick={()=>{
             localStorage.clear();
             location.reload();
+            location.href = "/"
 
           }}>Logout</Link>
         </li>
