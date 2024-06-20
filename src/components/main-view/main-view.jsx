@@ -7,6 +7,7 @@ import { SignupView } from "../signup-view/signup-view";
 import { Row, Col } from "react-bootstrap";
 import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom";
 import { ProfileView } from "../profile-view/profile-view";
+import { data } from "../../data";
 
 const NavBar = () => {
   if (!localStorage.getItem("user")) {
@@ -14,7 +15,7 @@ const NavBar = () => {
       <nav>
         <ul style={{ display: "flex", justifyContent: "space-between" , listStyle: "none"}}>
           <li>
-            <Link to="/login">Login</Link>
+            <Link to="/login">{data.loginText}</Link>
           </li>
           <li>
             <Link to="/signup">Signup</Link>
