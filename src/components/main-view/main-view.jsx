@@ -4,7 +4,7 @@ import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
 import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom";
 import { ProfileView } from "../profile-view/profile-view";
 import { data } from "../../data";
@@ -15,10 +15,10 @@ const NavBar = () => {
       <nav>
         <ul style={{ display: "flex", justifyContent: "space-between" , listStyle: "none"}}>
           <li>
-            <Link to="/login">{data.loginText}</Link>
+            <Button to="/login">{data.loginText}</Button>
           </li>
           <li>
-            <Link to="/signup">Signup</Link>
+            <Button to="/signup">Signup</Button>
           </li>
         </ul>
       </nav>
@@ -29,18 +29,18 @@ const NavBar = () => {
     <nav>
       <ul style={{ display: "flex", justifyContent: "space-between" , listStyle: "none"}}>
         <li>
-          <Link to="/">Movies</Link>
+          <Button to="/">Movies</Button>
         </li>
         <li>
-          <Link to="/profile">Profile</Link>
+          <Button to="/profile">Profile</Button>
         </li>
         <li>
-          <Link to="#" onClick={()=>{
+          <Button to="#" onClick={()=>{
             localStorage.clear();
             location.reload();
             location.href = "/"
 
-          }}>Logout</Link>
+          }}>Logout</Button>
         </li>
       </ul>
     </nav>
