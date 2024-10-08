@@ -117,7 +117,12 @@ export const MainView = () => {
               <NavBar></NavBar>
               {!user ? (
                   <Navigate to="/login" replace />
-                  ):(<>
+                  ):(<div style={
+                    {display: "grid",
+                      gridTemplateColumns: "auto auto auto",
+                      backgroundColor: "#2196F3",
+                      padding: "10px"}
+                  }>
                   {
                     movies.map((movie) => (
         <Col className = 'md5'>
@@ -130,7 +135,7 @@ export const MainView = () => {
         />
         </Col>
       ))}
-      </>
+      </div>
       )}
             </>
         }>
