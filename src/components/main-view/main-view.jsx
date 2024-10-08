@@ -4,7 +4,7 @@ import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
 import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom";
 import { ProfileView } from "../profile-view/profile-view";
 import { data } from "../../data";
@@ -13,12 +13,16 @@ const NavBar = () => {
   if (!localStorage.getItem("user")) {
     return (
       <nav>
-        <ul style={{ display: "flex", justifyContent: "space-between" , listStyle: "none"}}>
+        <ul style={{ display: "flex", justifyContent: "space-between" , listStyle: "none", padding: "8px"}}>
           <li>
-            <Link to="/login">{data.loginText}</Link>
+          <Button>
+            <Link style={{textDecoration:"none", color: "white"}} to="/login">Login</Link>
+            </Button>
           </li>
           <li>
-            <Link to="/signup">Signup</Link>
+          <Button>
+            <Link style={{textDecoration:"none", color: "white"}} to="/signup">Signup</Link>
+            </Button>
           </li>
         </ul>
       </nav>
@@ -27,20 +31,26 @@ const NavBar = () => {
 
   return (
     <nav>
-      <ul style={{ display: "flex", justifyContent: "space-between" , listStyle: "none"}}>
+      <ul style={{ display: "flex", justifyContent: "space-between" , listStyle: "none", padding: "8px"}}>
         <li>
-          <Link to="/">Movies</Link>
+          <Button>
+          <Link to="/" style={{textDecoration:"none", color: "white"}}>Movies</Link>
+          </Button>
         </li>
         <li>
-          <Link to="/profile">Profile</Link>
+          <Button>
+          <Link to="/profile" style={{textDecoration:"none", color: "white"}}>Profile</Link>
+          </Button>
         </li>
         <li>
-          <Link to="#" onClick={()=>{
+          <Button>
+          <Link style={{textDecoration:"none", color: "white"}} to="#" onClick={()=>{
             localStorage.clear();
             location.reload();
             location.href = "/"
 
           }}>Logout</Link>
+          </Button>
         </li>
       </ul>
     </nav>
@@ -121,11 +131,14 @@ export const MainView = () => {
                     {display: "grid",
                       gridTemplateColumns: "auto auto auto",
                       backgroundColor: "#2196F3",
-                      padding: "10px"}
+                      padding: "10px",
+                      gridGap: "10px"
+                    
+                    }
                   }>
                   {
                     movies.map((movie) => (
-        <Col className = 'md5'>
+        // <Col className = 'md5'>
         <MovieCard
           key={movie._id}
           movie={movie}
@@ -133,7 +146,7 @@ export const MainView = () => {
             setSelectedMovie(newSelectedMovie);
           }}
         />
-        </Col>
+        // </Col>
       ))}
       </div>
       )}

@@ -39,9 +39,11 @@ export const MovieCard = ({ movie, onMovieClick }) => {
         <Card.Body>
         <Card.Title>{movie.Title}</Card.Title>
         <Card.Text>{movie.Director.Name}</Card.Text>
-        <Link to = {`/movies/${movie._id}`}>
+        <Button>
+        <Link to = {`/movies/${movie._id}`} style={{color:"white", textDecoration:"none"}}>
           Open
         </Link>
+        </Button>
         <Button onClick={addFav}>
           Add to Favorites
         </Button>
